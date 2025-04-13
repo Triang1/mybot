@@ -1,0 +1,517 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="kr210_robot">
+
+    <link name="world"/>
+    <joint name="world_joint" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0.5" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_link">
+        <inertial>
+            <origin xyz="-0.027804 0.00039112 0.14035" rpy="0.0 0.0 0.0" />
+            <mass value="1572.9"/>
+            <inertia ixx="89.282" ixy="-0.47721" ixz="0.85562" iyy="107.51" iyz="0.0067576" izz="172.02"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="-1.57 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/visual/base_link.dae" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.75294 0.75294 0.75294 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="-1.57 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/collision/base_link.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+        </collision>
+    </link>
+    
+    <link name="link_1">
+        <inertial>
+            <origin xyz="-0.036811 -0.024697 0.56577" rpy="0.0 0.0 0.0"/>
+            <mass value="1385.5"/>
+            <inertia ixx="90.873" ixy="33.809" ixz="17.159" iyy="147.03" iyz="0.063634" izz="168.19"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/visual/link_1.dae" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.75294 0.75294 0.75294 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/collision/link_1.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+        </collision>         
+    </link>
+
+    <joint name="joint_1" type="revolute">
+        <origin xyz="-0.00262 0.00097586 0.33099" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>
+        <child link="link_1"/>
+        <axis xyz="0.0 0.0 1.0"/>
+        <limit lower="-3.228859205" upper="3.228859205" effort="50.0" velocity="2.146755039"/>
+    </joint>
+
+     <link name="link_2">
+        <inertial>
+            <origin xyz="0.016923 -0.19196 0.44751" rpy="0.0 0.0 0.0"/>
+            <mass value="958.62"/>
+            <inertia ixx="180.42" ixy="-0.83462" ixz="0.32549" iyy="177.68" iyz="-20.82" izz="20.495"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="-1.57 0.0 0.0"/>
+            <geometry>  
+                <mesh filename="package://mybot_description/meshes/visual/link_2.dae" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.75294 0.75294 0.75294 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/collision/link_2.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+        </collision>         
+    </link>
+
+    <joint name="joint_2" type="revolute">
+        <origin xyz="0.35277 -0.037476 0.4192" rpy="0.0 0.0 0.0"/>
+        <parent link="link_1"/>
+        <child link="link_2"/>
+        <axis xyz="0.0 1.0 0.0"/>
+        <limit lower="-0.785398185" upper="1.483529905" effort="50.0" velocity="2.007128695"/>
+    </joint>
+
+     <link name="link_3">
+        <inertial>
+            <origin xyz="0.18842 0.18344 -0.042799" rpy="0.0 0.0 0.0"/>
+            <mass value="710.03"/>
+            <inertia ixx="11.887" ixy="-0.12154" ixz="-1.3604" iyy="98.805" iyz="-0.056505" izz="96.251"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="-1.57 0.0 0.0"/>
+            <geometry>  
+                <mesh filename="package://mybot_description/meshes/visual/link_3.dae" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.75294 0.75294 0.75294 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/collision/link_3.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+        </collision>         
+    </link>
+
+    <joint name="joint_3" type="revolute">
+        <origin xyz="-9.8483E-05 -0.1475 1.2499" rpy="0.0 0.0 0.0"/>
+        <parent link="link_2"/>
+        <child link="link_3"/>
+        <axis xyz="0.0 1.0 0.0"/>
+        <limit lower="-3.66519153" upper="1.134464045" effort="50.0" velocity="1.954768816"/>
+    </joint>
+
+     <link name="link_4">
+        <inertial>
+            <origin xyz="0.27146 -0.007326 5.2775E-05" rpy="0.0 0.0 0.0"/>
+            <mass value="173.73"/>
+            <inertia ixx="1.8001" ixy="-0.18515" ixz="0.00051232" iyy="5.514" iyz="0.00070469" izz="6.3498"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="-1.57 0.0 0.0"/>
+            <geometry>  
+                <mesh filename="package://mybot_description/meshes/visual/link_4.dae" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.75294 0.75294 0.75294 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/collision/link_4.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+        </collision>         
+    </link>
+
+    <joint name="joint_4" type="revolute">
+        <origin xyz="0.95795 0.184 -0.055059" rpy="0.0 0.0 0.0"/>
+        <parent link="link_3"/>
+        <child link="link_4"/>
+        <axis xyz="1.0 0.0 0.0"/>
+        <limit lower="-6.10865255" upper="6.10865255" effort="50.0" velocity="3.124139447"/>
+    </joint>
+
+     <link name="link_5">
+        <inertial>
+            <origin xyz="0.04379 0.025984 3.5491E-07" rpy="0.0 0.0 0.0"/>
+            <mass value="72.17"/>
+            <inertia ixx="0.3938" ixy="-0.085332" ixz="1.7223E-06" iyy="0.68945" iyz="-7.0292E-06" izz="0.67292"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="-1.57 0.0 0.0"/>
+            <geometry>  
+                <mesh filename="package://mybot_description/meshes/visual/link_5.dae" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.75294 0.75294 0.75294 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/collision/link_5.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+        </collision>         
+    </link>
+
+    <joint name="joint_5" type="revolute">
+        <origin xyz="0.542 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="link_4"/>
+        <child link="link_5"/>
+        <axis xyz="0.0 1.0 0.0"/>
+        <limit lower="-2.181661625" upper="2.181661625" effort="50.0" velocity="3.001966396"/>
+    </joint>
+
+     <link name="link_6">
+        <inertial>
+            <origin xyz="-0.017956 -1.5237E-05 0.00015484" rpy="0.0 0.0 0.0"/>
+            <mass value="6.3154"/>
+            <inertia ixx="0.031746" ixy="1.7673E-07" ixz="-6.6558E-06" iyy="0.016686" iyz="1.4304E-07" izz="0.016723"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>  
+                <mesh filename="package://mybot_description/meshes/visual/link_6.dae" scale="1.0 1.0 1.0"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.75294 0.75294 0.75294 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/collision/link_6.stl" scale="1.0 1.0 1.0"/>
+            </geometry>
+        </collision>         
+    </link>
+
+    <joint name="joint_6" type="revolute">
+        <origin xyz="0.1925 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="link_5"/>
+        <child link="link_6"/>
+        <axis xyz="1.0 0.0 0.0"/>
+        <limit lower="-6.10865255" upper="6.10865255" effort="50.0" velocity="3.822271167"/>
+    </joint> 
+
+     <link name="link_ee">
+        <inertial>
+            <origin xyz="0.0 -0.3320 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="96.958"/>
+            <inertia ixx="42.3309" ixy="0.0" ixz="0.0" iyy="30.7353" iyz="0.0" izz="12.2794"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="1.57 -1.57 0.0"/>
+            <geometry>  
+                <mesh filename="package://mybot_description/meshes/tool/end_effector.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="">
+                <color rgba="0.75294 0.75294 0.75294 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="1.57 -1.57 0.0"/>
+            <geometry>
+                <mesh filename="package://mybot_description/meshes/tool/end_effector.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>         
+    </link>
+
+    <joint name="joint_7" type="fixed">
+        <!-- <origin xyz="0.0375 0 -0.00023924" rpy="0.0 0.0 0.0"/> -->
+        <origin xyz="0.0375 0 -0.0002" rpy="0.0 0.0 0.0"/>
+        <parent link="link_6"/>
+        <child link="link_ee"/>
+    </joint> 
+
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+
+        <joint name="joint_1">
+            <command_interface name="position">
+                <param name="min">-3.228861</param>
+                <param name="max">3.228861</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+
+        <joint name="joint_2">
+            <command_interface name="position">
+                <param name="min">-2.443462</param>
+                <param name="max">-0.087267</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+
+        <joint name="joint_3">
+            <command_interface name="position">
+                <param name="min">-2.094396</param>
+                <param name="max">2.932154</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+
+        <joint name="joint_4">
+            <command_interface name="position">
+                <param name="min">-6.108655</param>
+                <param name="max">6.108655</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+
+        <joint name="joint_5">
+            <command_interface name="position">
+                <param name="min">-2.181663</param>
+                <param name="max">2.181663</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+
+        <joint name="joint_6">
+            <command_interface name="position">
+                <param name="min">-6.108655</param>
+                <param name="max">6.108655</param>
+            </command_interface>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+            <state_interface name="effort"/>
+        </joint>
+    </ros2_control>
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros2_control.so">
+            <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+            <parameters>$(find mybot_description)/config/simple_controller.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+    <transmission name="tran1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_1">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="motor1">
+            <mechanicalReduction>1.0</mechanicalReduction>
+            <hardwareInterface>position</hardwareInterface>
+        </actuator>
+    </transmission>
+
+    <transmission name="tran2">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_2">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="motor2">
+            <mechanicalReduction>1.0</mechanicalReduction>
+            <hardwareInterface>position</hardwareInterface>
+        </actuator>
+    </transmission>
+
+    <transmission name="tran3">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_3">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="motor3">
+            <mechanicalReduction>1.0</mechanicalReduction>
+            <hardwareInterface>position</hardwareInterface>
+        </actuator>
+    </transmission>
+
+    <transmission name="tran4">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_4">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="motor4">
+            <mechanicalReduction>1.0</mechanicalReduction>
+            <hardwareInterface>position</hardwareInterface>
+        </actuator>
+    </transmission>
+
+    <transmission name="tran5">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_5">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="motor5">
+            <mechanicalReduction>1.0</mechanicalReduction>
+            <hardwareInterface>position</hardwareInterface>
+        </actuator>
+    </transmission>
+
+    <transmission name="tran6">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="joint_6">
+            <hardwareInterface>position</hardwareInterface>
+        </joint>
+        <actuator name="motor6">
+            <mechanicalReduction>1.0</mechanicalReduction>
+            <hardwareInterface>position</hardwareInterface>
+        </actuator>
+    </transmission>
+
+    <gazebo reference="base_link">
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>30</mu1>
+        <mu2>30</mu2>
+        <maxVel>1.0</maxVel>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+
+    <gazebo reference="link_1">
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>30</mu1>
+        <mu2>30</mu2>
+        <maxVel>1.0</maxVel>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+
+    <gazebo reference="link_2">
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>30</mu1>
+        <mu2>30</mu2>
+        <maxVel>1.0</maxVel>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+
+    <gazebo reference="link_3">
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>30</mu1>
+        <mu2>30</mu2>
+        <maxVel>1.0</maxVel>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+
+    <gazebo reference="link_4">
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>30</mu1>
+        <mu2>30</mu2>
+        <maxVel>1.0</maxVel>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+
+    <gazebo reference="link_5">
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>30</mu1>
+        <mu2>30</mu2>
+        <maxVel>1.0</maxVel>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+
+    <gazebo reference="link_6">
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>30</mu1>
+        <mu2>30</mu2>
+        <maxVel>1.0</maxVel>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+
+    <gazebo reference="link_ee">
+        <kp>1000000.0</kp>
+        <kd>100.0</kd>
+        <mu1>30</mu1>
+        <mu2>30</mu2>
+        <maxVel>1.0</maxVel>
+        <minDepth>0.001</minDepth>
+    </gazebo>
+
+    <gazebo reference="link_1">
+        <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="link_2">
+        <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="link_3">
+        <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="link_4">
+        <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="link_5">
+        <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="link_6">
+        <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="link_ee">
+        <selfCollide>true</selfCollide>
+    </gazebo>
+
+
+    <gazebo reference="world">
+        <static>true</static>
+    </gazebo>
+    <gazebo reference="base_link">
+        <material>Gazebo/White</material>
+        <turnGravityOff>true</turnGravityOff>
+    </gazebo>
+    <gazebo reference="link_1">
+        <material>Gazebo/White</material>
+        <turnGravityOff>true</turnGravityOff>
+    </gazebo>
+    <gazebo reference="link_2">
+        <material>Gazebo/White</material>
+        <turnGravityOff>true</turnGravityOff>
+    </gazebo>
+    <gazebo reference="link_3">
+        <material>Gazebo/White</material>
+        <turnGravityOff>true</turnGravityOff>
+    </gazebo>
+    <gazebo reference="link_4">
+        <material>Gazebo/White</material>
+        <turnGravityOff>true</turnGravityOff>
+    </gazebo>
+    <gazebo reference="link_5">
+        <material>Gazebo/White</material>
+        <turnGravityOff>true</turnGravityOff>
+    </gazebo>
+    <gazebo reference="link_6">
+        <material>Gazebo/White</material>
+        <turnGravityOff>true</turnGravityOff>
+    </gazebo>
+
+</robot>
+

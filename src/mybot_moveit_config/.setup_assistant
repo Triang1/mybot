@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: mybot_description
+    relative_path: urdf/kr210_robot.urdf
+  srdf:
+    relative_path: config/kr210_robot.srdf
+  package_settings:
+    author_name: TODO
+    author_email: todo@email.com
+    generated_timestamp: 1735476629
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr210_robot">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+
+    <!-- Import kr210_robot urdf file -->
+    <xacro:include filename="$(find mybot_description)/urdf/kr210_robot.urdf" />
+
+    <!-- Import control_xacro -->
+    
+    <!-- <xacro:kr210_robot_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/> -->
+    
+    <!-- 对一些link_进行gazebo的属性设置 -->
+    <gazebo reference="link_1">
+        <material>Gazebo/Purple</material>
+        <self_collide>false</self_collide>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link_2">
+        <material>Gazebo/Red</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link_3">
+        <material>Gazebo/Blue</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link_4">
+        <material>Gazebo/Green</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link_5">
+        <material>Gazebo/Yellow</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link_6">
+        <material>Gazebo/Orange</material>
+        <gravity>false</gravity>
+    </gazebo>
+    <gazebo reference="link_ee">
+        <material>Gazebo/White</material>
+        <gravity>false</gravity>
+    </gazebo>
+
+    <!-- 设置不了静态，不知为啥 -->
+    <gazebo>
+        <is_static>true</is_static>
+        <!-- 这个static不能这么用，会导致 
+         Warning [parser_urdf.cc:1134] multiple inconsistent <static> exists due to fixed joint reduction overwriting previous value [true] with [false].
+-->
+        <!-- <static>true</static> -->
+        <self_collide>true</self_collide>
+    </gazebo>
+
+    <!-- 声明马达,好像没什么卵用 -->
+    <!-- <xacro:macro name="joint_transmission" params="joint_name">
+        <transmission name="${joint_name}_trans">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${joint_name}">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${joint_name}_motor">
+                <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>
+    <xacro:joint_transmission joint_name="joint1"/>
+    <xacro:joint_transmission joint_name="joint2"/>
+    <xacro:joint_transmission joint_name="joint3"/>
+    <xacro:joint_transmission joint_name="joint4"/>
+    <xacro:joint_transmission joint_name="joint5"/> -->
+
+
+    <!-- 声明ros2_control -->
+    <ros2_control name="GazeboSystem" type="system">
+        <hardware>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </hardware>
+        <joint name="joint_1">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint_2">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>arm_claw
+        </joint>
+        <joint name="joint_3">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint_4">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint_5">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="joint_6">
+            <command_interface name="position"/>
+            <state_interface name="position">
+                <param name="initial_value">0</param>
+            </state_interface>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+
+    <!-- 加载ros2_control插件 -->
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <parameters>$(find mybot_moveit_config)/config/ros2_controllers.yaml</parameters>
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher</robot_param_node>
+        </plugin>
+    </gazebo>
+
+
+</robot>

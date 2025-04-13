@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="default">
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <model name="标准块A1">
+      <pose>0.843 -2.356 -5.4  1.57 0 1.57</pose>
+      <static>true</static>
+      <link name="up">
+        <visual name="visual">
+          <geometry>
+            <mesh>
+                <uri>model://A1/meshes/标准块A1.dae</uri>
+                <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh>
+                <uri>model://A1/meshes/标准块A1.dae</uri>
+                <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+  </world>
+</sdf>
+
