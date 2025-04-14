@@ -12,6 +12,7 @@
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #include <visualization_msgs/msg/marker.hpp>
 
+
 // 圆弧轨迹生成，末端 z 轴朝向法向（垂直外法线）
 std::vector<geometry_msgs::msg::Pose> generateArcTrajectory(
     const geometry_msgs::msg::Point& center,
@@ -119,7 +120,7 @@ int main(int argc, char* argv[])
     center.y = 0.0;
     center.z = -5.2;
 
-    auto waypoints = generateArcTrajectory(
+    auto forward_waypoints = generateArcTrajectory(
         center,
         6.4,
         68.4 * M_PI / 180.0,
@@ -127,12 +128,27 @@ int main(int argc, char* argv[])
         50
     );
 
+    auto reverse_waypoints = generateArcTrajectory(
+        center,
+        6.4,
+        111.6 * M_PI / 180.0,
+        68.4 * M_PI / 180.0,
+        50
+    );
+
+    // 合并前向和反向轨迹
+    forward_waypoints.insert(
+        forward_waypoints.end(),
+        reverse_waypoints.begin(),
+        reverse_waypoints.end()
+    );
+
     // 可视化轨迹
-    publishTrajectoryMarker(node, waypoints);
+    publishTrajectoryMarker(node, forward_waypoints);
 
     // 笛卡尔路径规划
     moveit_msgs::msg::RobotTrajectory trajectory;
-    double fraction = move_group.computeCartesianPath(waypoints, 0.01, 0.0, trajectory);
+    double fraction = move_group.computeCartesianPath(forward_waypoints, 0.01, 0.0, trajectory);
 
     if (fraction < 0.9) {
         RCLCPP_WARN(logger, "路径规划完成度仅 %.1f%%，可视化轨迹已生成", fraction * 100.0);

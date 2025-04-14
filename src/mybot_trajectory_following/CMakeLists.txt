@@ -12,10 +12,12 @@ find_package(rclcpp REQUIRED)
 find_package(visualization_msgs REQUIRED)
 
 add_executable(follow_arc_trajectory src/follow_arc_trajectory.cpp)
+add_executable(follow_point src/follow_point.cpp)
 
 ament_target_dependencies(follow_arc_trajectory rclcpp moveit_ros_planning_interface visualization_msgs)
+ament_target_dependencies(follow_point rclcpp moveit_ros_planning_interface)
 
-install(TARGETS follow_arc_trajectory
+install(TARGETS follow_arc_trajectory follow_point
   DESTINATION lib/${PROJECT_NAME}
 )
 
