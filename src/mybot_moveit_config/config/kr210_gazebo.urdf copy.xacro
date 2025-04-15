@@ -129,19 +129,5 @@
         </plugin>
     </gazebo>
 
-    <!-- 关节力传感器 -->
-    <gazebo reference="fixed">
-        <provideFeedback>true</provideFeedback>
-        <disableFixedJointLumping>false</disableFixedJointLumping>
-        <sensor name="ft_sensor" type="force_torque">
-            <always_on>true</always_on>
-            <update_rate>120</update_rate>
-            <visualize>false</visualize>
-            <force_torque>
-                <frame>child</frame>
-                <messure_direction>parent_to_child</messure_direction>
-            </force_torque>
-        </sensor>
-    </gazebo>
 
 </robot>

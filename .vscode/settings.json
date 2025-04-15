@@ -1,0 +1,4 @@
+{
+    "ros.distro": "humble",
+    "cmake.sourceDirectory": "/home/robot/mybot/mybot_ws/src/mybot_description"
+}
